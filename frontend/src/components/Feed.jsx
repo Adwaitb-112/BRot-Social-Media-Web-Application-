@@ -1,0 +1,50 @@
+import React from 'react'
+import { FaRegHeart } from "react-icons/fa";
+import logo from '../assets/logo.jpg'
+import StoryDp from './StoryDp';
+import Nav from './Nav';
+import { useSelector } from 'react-redux';
+import Post from './Post';
+import { FiMessageSquare } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+
+
+function Feed() {
+  const { postData } = useSelector(state => state.post)
+  const { userData } = useSelector(state => state.user)
+  const { storyList,currentUserStory } = useSelector(state => state.story)
+      const navigate = useNavigate()
+
+  return (
+    <div className='lg:w-[50%] w-full bg-black min-h-[100vh] lg:h-[100vh] relative lg:overflow-y-auto '>
+      <div className='w-full h-[100px] flex items-center justify-between p-[20px] lg:hidden'>
+        <img src={logo} alt="" className='w-[80px]' />
+
+        <div className='flex items-center gap-[10px]'>
+          <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
+          <FiMessageSquare className='text-[white] w-[25px] h-[25px]' onClick={() => navigate("/messages")}/>
+
+        </div>
+      </div>
+
+      <div className='flex overflow-auto justify-start gap-[10px] w-full items-center p-[20px]'>
+        <StoryDp userName={"Your Story"} ProfileImage={userData?.profileImage} story={currentUserStory} />
+
+        {storyList?.map((story, index) => (
+          <StoryDp userName={story.author.userName} ProfileImage={story.author.profileImage} story={story} key={index} />
+        ))}
+      </div>
+
+      <div className='w-full min-h-[100vh] flex flex-col items-center gap-[20px] p-[10px] pt-[40px] bg-white rounded-t-[60px] relative pb-[120px]'>
+        <Nav />
+        {postData?.map((post, index) => (
+          <Post post={post} key={index} />
+        ))}
+
+      </div>
+
+    </div>
+  )
+}
+
+export default Feed
