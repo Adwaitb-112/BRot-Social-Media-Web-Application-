@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 
 function Feed() {
   const { postData } = useSelector(state => state.post)
-  const { userData } = useSelector(state => state.user)
-  const { storyList,currentUserStory } = useSelector(state => state.story)
-      const navigate = useNavigate()
+  const { userData, notificationData } = useSelector(state => state.user)
+  const { storyList, currentUserStory } = useSelector(state => state.story)
+  const navigate = useNavigate()
 
   return (
     <div className='lg:w-[50%] w-full bg-black min-h-[100vh] lg:h-[100vh] relative lg:overflow-y-auto '>
@@ -21,8 +21,11 @@ function Feed() {
         <img src={logo} alt="" className='w-[80px]' />
 
         <div className='flex items-center gap-[10px]'>
-          <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
-          <FiMessageSquare className='text-[white] w-[25px] h-[25px]' onClick={() => navigate("/messages")}/>
+          <div className='relative' onClick={() => navigate("/notifications")}>
+            <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
+            {(notificationData?.length > 0 && notificationData.some((noti) => noti.isRead == false)) && (<div className='w-[10px] h-[10px] absolute top-0 right-[-5px] bg-blue-600 rounded-full'></div>)}
+          </div>
+          <FiMessageSquare className='text-[white] w-[25px] h-[25px]' onClick={() => navigate("/messages")} />
 
         </div>
       </div>

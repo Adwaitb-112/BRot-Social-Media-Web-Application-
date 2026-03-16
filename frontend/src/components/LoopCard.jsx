@@ -60,8 +60,7 @@ function LoopCard({ loop }) {
       dispatch(setLoopData(updatedLoops))
       setMessage("")
     } catch (error) {
-      console.log(error)
-
+      console.log(error.response)
     }
   }
 
@@ -73,7 +72,7 @@ function LoopCard({ loop }) {
       const updatedLoops = loopData.map(p => p._id == loop._id ? updatedLoop : p)
       dispatch(setLoopData(updatedLoops))
     } catch (error) {
-      console.log(error)
+      console.log(error.response)
     }
   }
 
@@ -127,7 +126,7 @@ function LoopCard({ loop }) {
     })
     return () => {
       socket?.off("likedLoop"),
-      socket?.off("commentedLoop")
+        socket?.off("commentedLoop")
     }
   }, [socket, loopData, dispatch])
 

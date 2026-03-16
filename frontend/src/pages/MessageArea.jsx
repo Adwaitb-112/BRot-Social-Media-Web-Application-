@@ -46,7 +46,7 @@ function MessageArea() {
             setFrontendImage(null)
 
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
 
@@ -55,7 +55,7 @@ function MessageArea() {
             const result = await axios.get(`${serverUrl}/api/message/getAll/${selectedUser._id}`, { withCredentials: true })
             dispatch(setMessages(result.data))
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
 

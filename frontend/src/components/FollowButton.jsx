@@ -16,7 +16,7 @@ function FollowButton({ targetUserId, tailwind, onFollowChange }) {
             }
             dispatch(toggleFollow(targetUserId))
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
 

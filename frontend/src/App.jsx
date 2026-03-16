@@ -22,6 +22,8 @@ import { setOnlineUsers, setSocket } from './redux/socketSlice'
 import getFollowingList from './hooks/getFollowingList'
 import getPrevChatUsers from './hooks/getPrevChatUsers'
 import Search from './pages/Search'
+import getAllNotifications from './hooks/getAllNotifications'
+import Notifications from './pages/Notifications'
 
 export const serverUrl = "http://localhost:8000"
 
@@ -37,6 +39,7 @@ function App() {
   getAllStories()
   getFollowingList()
   getPrevChatUsers()
+  getAllNotifications()
 
   useEffect(() => {
     if (userData) {
@@ -74,6 +77,7 @@ function App() {
       <Route path='/loops' element={userData ? <Loops /> : <Navigate to={"/signin"} />} />
       <Route path='/messages' element={userData ? <Messages /> : <Navigate to={"/signin"} />} />
       <Route path='/messageArea' element={userData ? <MessageArea /> : <Navigate to={"/signin"} />} />
+      <Route path='/notifications' element={userData ? <Notifications /> : <Navigate to={"/signin"} />} />
       <Route path='/search' element={userData ? <Search /> : <Navigate to={"/signin"} />} />
     </Routes>
   )

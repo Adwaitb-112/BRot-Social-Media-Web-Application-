@@ -24,7 +24,7 @@ function Profile() {
             const result = await axios.get(`${serverUrl}/api/user/getProfile/${userName}`, { withCredentials: true })
             dispatch(setprofileData(result.data))
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
     const handleLogOut = async () => {

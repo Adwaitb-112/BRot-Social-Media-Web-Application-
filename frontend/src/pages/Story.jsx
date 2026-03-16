@@ -18,7 +18,7 @@ function Story() {
             dispatch(setStoryData(result.data[0]))
 
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
     useEffect(() => {

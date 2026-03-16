@@ -48,7 +48,7 @@ function EditProfile() {
             setLoading(false)
             navigate(`/profile/${userData.userName}`)
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
         }
     }
 

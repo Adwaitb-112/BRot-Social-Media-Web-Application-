@@ -1,5 +1,7 @@
 import User from "../models/user.model.js"
 import uploadOnCloudinary from "../config/cloudinary.js"
+import { getSocketId } from "../socket.js"
+import Notification from "../models/notification.model.js"
 
 export const getCurrentUser = async (req, res) => {
     try {
@@ -109,7 +111,7 @@ export const follow = async (req, res) => {
             if (currentUser._id != targetUserId._id) {
                 const notification = await Notification.create({
                     sender: currentUser._id,
-                    receiver: targetUserId._id,
+                    receiver: targetUserId,
                     type: "follow",
                     message: "started following you"
                 })
@@ -162,5 +164,29 @@ export const search = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: `search error ${error}` })
 
+    }
+}
+
+export const getAllNotifications = async (req, res) => {
+    try {
+        const notifications = await Notification.find({
+            receiver: req.userId,
+        }).populate("sender receiver post loop")
+
+        return res.status(200).json(notifications)
+    } catch (error) {
+        return res.status(500).json({ message: `getAllNotifications error ${error}` })
+    }
+}
+
+export const markAsRead = async (req, res) => {
+    try {
+        const notificationId = req.params.notificationId
+        const notification = await Notification.findById(notificationId).populate("sender receiver post loop")
+        notification.isRead = true
+        notification.save
+        return res.status(200).json({ message: "marked As Read" })
+    } catch (error) {
+        return res.status(500).json({ message: `markAsRead error ${error}` })
     }
 }
