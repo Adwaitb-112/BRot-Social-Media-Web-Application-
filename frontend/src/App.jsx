@@ -26,7 +26,7 @@ import getAllNotifications from './hooks/getAllNotifications'
 import Notifications from './pages/Notifications'
 import { setNotificationData } from './redux/userSlice'
 
-export const serverUrl = "http://localhost:8000"
+export const serverUrl = "https://brot-social-media-web-application.onrender.com"
 
 function App() {
   const { userData, notificationData } = useSelector(state => state.user)
