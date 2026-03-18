@@ -1,7 +1,7 @@
 import React from 'react'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom';
-import OnlineUser from '../components/onlineUser';
+import OnlineUser from '../components/OnlineUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedUser } from '../redux/messageSlice';
 import dp from "../assets/dp.png";
