@@ -21,7 +21,7 @@ function FollowButton({ targetUserId, tailwind, onFollowChange }) {
     }
 
     return (
-        <button className={tailwind} onClick={handleFollow}>
+        <button className={`${tailwind} font-medium `} onClick={handleFollow}>
             {isFollowing ? "Following" : "Follow"}
         </button>
     )

@@ -11,7 +11,7 @@ userRouter.get("/followingList", isAuth, followingList)
 userRouter.get("/getProfile/:userName", isAuth, getProfile)
 userRouter.get("/search", isAuth, search)
 userRouter.get("/getAllNotifications", isAuth, getAllNotifications)
-userRouter.get("/markAsRead/:notificationId", isAuth, markAsRead)
+userRouter.post("/markAsRead/", isAuth, markAsRead)
 userRouter.get("/follow/:targetUserId", isAuth, follow)
 userRouter.post("/editProfile", isAuth, upload.single("profileImage"), editProfile)
 

@@ -24,11 +24,12 @@ import getPrevChatUsers from './hooks/getPrevChatUsers'
 import Search from './pages/Search'
 import getAllNotifications from './hooks/getAllNotifications'
 import Notifications from './pages/Notifications'
+import { setNotificationData } from './redux/userSlice'
 
 export const serverUrl = "http://localhost:8000"
 
 function App() {
-  const { userData } = useSelector(state => state.user)
+  const { userData, notificationData } = useSelector(state => state.user)
   const { socket } = useSelector(state => state.socket)
   const dispatch = useDispatch()
 
@@ -62,6 +63,12 @@ function App() {
       }
     }
   }, [userData])
+
+
+  socket?.on("newNotification", (noti) => {
+    dispatch(setNotificationData([...notificationData, noti]))
+  })
+
 
 
   return (

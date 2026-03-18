@@ -7,6 +7,7 @@ import { setNotificationData } from '../redux/userSlice'
 function getAllNotifications() {
     const dispatch = useDispatch()
     const { userData } = useSelector(state => state.user)
+    
     useEffect(() => {
         const fetchNotifications = async () => {
             try {

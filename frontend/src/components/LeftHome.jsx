@@ -35,7 +35,7 @@ function LeftHome() {
 
                 <div className='relative z-[100]' onClick={() => setShowNotifications(prev => !prev)} >
                     <FaRegHeart className='text-[white] w-[25px] h-[25px]' />
-                    {(notificationData?.length > 0 && notificationData.some((noti) => noti.isRead === false)) && (<div className='w-[10px] h-[10px] absolute top-0 right-[-5px] bg-blue-600 rounded-full'></div>)}
+                    {(notificationData?.length > 0 && notificationData.some((noti) => noti.isRead == false)) && (<div className='w-[10px] h-[10px] absolute top-0 right-[-5px] bg-blue-600 rounded-full'></div>)}
 
                 </div>
             </div>

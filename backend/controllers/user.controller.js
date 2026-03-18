@@ -171,7 +171,7 @@ export const getAllNotifications = async (req, res) => {
     try {
         const notifications = await Notification.find({
             receiver: req.userId,
-        }).populate("sender receiver post loop")
+        }).populate("sender receiver post loop").sort({ createdAt: -1 })
 
         return res.status(200).json(notifications)
     } catch (error) {
@@ -181,11 +181,19 @@ export const getAllNotifications = async (req, res) => {
 
 export const markAsRead = async (req, res) => {
     try {
-        const notificationId = req.params.notificationId
-        const notification = await Notification.findById(notificationId).populate("sender receiver post loop")
-        notification.isRead = true
-        notification.save
-        return res.status(200).json({ message: "marked As Read" })
+        const { notificationId } = req.body
+        if (Array.isArray(notificationId)) {
+            await Notification.updateMany(
+                { _id: { $in: notificationId }, receiver: req.userId },
+                { $set: { isRead: true } }
+            );
+        }
+        else {
+            await Notification.findOneAndUpdate(
+                { _id: notificationId, receiver: req.userId },
+                { $set: { isRead: true } }
+            )
+        }
     } catch (error) {
         return res.status(500).json({ message: `markAsRead error ${error}` })
     }
